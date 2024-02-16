@@ -62,11 +62,21 @@ void	*routine_one(t_philo *philo)
 	return (NULL);
 }
 
-void	*routine_philo(void *philo_ptr)
+/**
+ * @brief The routine function for a philosopher thread.
+ * 
+ * This function is executed by each philosopher thread. It performs the
+ * actions of eating, sleeping, and thinking in a loop until the death flag
+ * is set.
+ * 
+ * @param philo_ptr A pointer to the philosopher struct.
+ * @return void* Always returns NULL.
+ */
+void *routine_philo(void *philo_ptr)
 {
-	t_philo	*philo;
+	t_philo *philo;
 
-	philo = (t_philo *) philo_ptr;
+	philo = (t_philo *)philo_ptr;
 	synchronize_start(philo->data->time_of_start);
 	if (philo->data->philos_total == 1)
 		return (routine_one(philo));

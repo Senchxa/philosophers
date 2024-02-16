@@ -12,53 +12,19 @@
 
 #include "philo.h"
 
-int	simulation_start(t_data *data)
+/**
+ * @file main.c
+ * @brief The main function of the program.
+ *
+ * This file contains the main function of the program. 
+ 	It serves as the entry point
+ * of the program, initializing the data, checking the input, starting the simulation,
+ * and freeing the allocated memory.
+ */
+
+int main(int argc, char **argv)
 {
-	int			i;
-
-	data->time_of_start = ft_save_time() + (data->philos_total * 10);
-	i = 0;
-	while (i < data->philos_total)
-	{
-		if (pthread_create(&data->philos[i]->thread, NULL,
-				&routine_philo, data->philos[i]))
-			ft_exit_error("Failed to create a philo thread.", data);
-		pthread_mutex_lock(&data->philos[i]->lock_philo);
-		data->philos[i]->last_meal = data->time_of_start;
-		pthread_mutex_unlock(&data->philos[i]->lock_philo);
-		i++;
-	}
-	if (data->philos_total > 1)
-	{
-		if (pthread_create(&data->watcher_thread, NULL,
-				&routine_watcher, data))
-			ft_exit_error("Failed to create the watcher thread.", data);
-	}
-	return (0);
-}
-
-int	simulation_end(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->philos_total)
-	{
-		if (pthread_join(data->philos[i]->thread, NULL))
-			ft_exit_error("Failed to join a philo thread.", data);
-		i++;
-	}
-	if (data->philos_total > 1)
-	{
-		if (pthread_join(data->watcher_thread, NULL))
-			ft_exit_error("Failed to join the watcher thread.", data);
-	}
-	return (0);
-}
-
-int	main(int argc, char **argv)
-{
-	t_data	*data;
+	t_data *data;
 
 	data = NULL;
 	check_input(argc, argv);
@@ -66,5 +32,5 @@ int	main(int argc, char **argv)
 	simulation_start(data);
 	simulation_end(data);
 	free_data(data);
-	return (0);
+	return 0;
 }
