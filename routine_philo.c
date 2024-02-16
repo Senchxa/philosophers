@@ -34,7 +34,7 @@ void	action_think(t_philo *philo)
 	ft_usleep(think_time);
 }
 
-void	action_eat(t_philo *philo)
+void	eat(t_philo *philo)
 {
 	forks_pickup(philo);
 	ft_print_status(philo, FORK_EQUIP);
@@ -74,7 +74,7 @@ void	*routine_philo(void *philo_ptr)
 		ft_usleep(philo->data->time_to_eat);
 	while (get_death_flag(philo->data) != 1)
 	{
-		action_eat(philo);
+		eat(philo);
 		action_sleep(philo, philo->data->time_to_sleep);
 		action_think(philo);
 	}

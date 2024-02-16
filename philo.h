@@ -73,7 +73,7 @@ int				simulation_end(t_data *data);
 
 void			*routine_philo(void *philo_ptr);
 void			*routine_one(t_philo *philo);
-void			action_eat(t_philo *philo);
+void			eat(t_philo *philo);
 void			forks_pickup(t_philo *philo);
 void			forks_putdown(t_philo *philo);
 void			action_sleep(t_philo *philo, int64_t philo_sleep_time);
