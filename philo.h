@@ -25,6 +25,7 @@
 # include <pthread.h> // for threads
 # include <unistd.h> // for usleep
 # include <sys/time.h> // for gettimeofday
+# include <limits.h>
 
 typedef struct s_philo
 {
@@ -56,14 +57,14 @@ typedef struct s_data
 	uint64_t		time_to_sleep;
 }			t_data;
 
-int				check_input(int argc, char **argv);
+int				check_input(int ac, char **av);
 void			check_values(char *arg, int i);
-void			check_intmax(char *arg);
-void			check_format(char *arg);
-void			check_args(int argc);
+void			positive_only(char *str);
+void			digit_only(char *str);
+void 		max_int(char *str);
 
-t_data			*init_data(int argc, char **argv);
-void			init_struct_data(t_data *data, int argc, char **argv);
+t_data			*init_data(int ac, char **av);
+void			init_struct_data(t_data *data, int ac, char **av);
 t_philo			**init_struct_philos(t_data *data);
 pthread_mutex_t	*init_forks(t_data *data);
 void			place_forks(t_data *data);
@@ -88,7 +89,7 @@ void			set_death_flag(t_data *data);
 int				get_eating_flag(t_philo *philo);
 void			set_eating_flag(t_philo *philo, int flag);
 
-int				ft_atoi(const char *nptr);
+int	integer_atoi(char *str);
 uint64_t		ft_save_time(void);
 int				ft_usleep(uint64_t time);
 void			synchronize_start(uint64_t time_of_start);

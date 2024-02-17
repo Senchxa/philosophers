@@ -16,20 +16,20 @@
  * Initializes the data structure with the provided arguments.
  * 
  * @param data The pointer to the data structure to be initialized.
- * @param argc The number of command-line arguments.
- * @param argv The array of command-line arguments.
+ * @param ac The number of command-line arguments.
+ * @param av The array of command-line arguments.
  */
-void init_struct_data(t_data *data, int argc, char **argv)
+void init_struct_data(t_data *data, int ac, char **av)
 {
 	// Initialize data members with command-line arguments
-	data->philos_total = ft_atoi(argv[1]);
-	data->time_to_die = (uint64_t)ft_atoi(argv[2]);
-	data->time_to_eat = (uint64_t)ft_atoi(argv[3]);
-	data->time_to_sleep = (uint64_t)ft_atoi(argv[4]);
+	data->philos_total = integer_atoi(av[1]);
+	data->time_to_die = (uint64_t)integer_atoi(av[2]);
+	data->time_to_eat = (uint64_t)integer_atoi(av[3]);
+	data->time_to_sleep = (uint64_t)integer_atoi(av[4]);
 
 	// Check if rounds_total argument is provided
-	if (argc == 6)
-		data->rounds_total = ft_atoi(argv[5]);
+	if (ac == 6)
+		data->rounds_total = integer_atoi(av[5]);
 	else
 		data->rounds_total = -1;
 
@@ -140,11 +140,11 @@ pthread_mutex_t *init_forks(t_data *data)
 /**
  * Initializes the data structure and returns a pointer to it.
  * 
- * @param argc The number of command-line arguments.
- * @param argv The array of command-line arguments.
+ * @param ac The number of command-line arguments.
+ * @param av The array of command-line arguments.
  * @return The pointer to the initialized data structure.
  */
-t_data *init_data(int argc, char **argv)
+t_data *init_data(int ac, char **av)
 {
 	t_data *data;
 
@@ -154,7 +154,7 @@ t_data *init_data(int argc, char **argv)
 		ft_exit_error("Malloc error", NULL);
 
 	// Initialize the data structure
-	init_struct_data(data, argc, argv);
+	init_struct_data(data, ac, av);
 	data->philos = init_struct_philos(data);
 	data->locks_forks = init_forks(data);
 	place_forks(data);

@@ -12,32 +12,6 @@
 
 #include "philo.h"
 
-int	ft_atoi(const char *nptr)
-{
-	int						sign;
-	int						i;
-	unsigned long long int	num;
-
-	i = 0;
-	num = 0;
-	sign = 1;
-	while (nptr[i] == ' ' || nptr[i] == '\t'
-		|| nptr[i] == '\f' || nptr[i] == '\r'
-		|| nptr[i] == '\n' || nptr[i] == '\v')
-		i++;
-	if (nptr[i] == '+' || nptr[i] == '-')
-		if (nptr[i++] == '-')
-			sign = sign * -1;
-	while (nptr[i] >= '0' && nptr[i] <= '9')
-	{
-		num = num * 10 + (nptr[i] - '0');
-		i++;
-	}
-	if (num > INT32_MAX)
-		return (-1);
-	return (sign * (int)num);
-}
-
 uint64_t	ft_save_time(void)
 {
 	struct timeval	tv;

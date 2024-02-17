@@ -12,25 +12,15 @@
 
 #include "philo.h"
 
-/**
- * @file main.c
- * @brief The main function of the program.
- *
- * This file contains the main function of the program. 
- 	It serves as the entry point
- * of the program, initializing the data, checking the input, starting the simulation,
- * and freeing the allocated memory.
- */
-
-int main(int argc, char **argv)
+int	main(int ac, char **av)
 {
 	t_data *data;
 
 	data = NULL;
-	check_input(argc, argv);
-	data = init_data(argc, argv);
+	check_input(ac, av);
+	data = init_data(ac, av);
 	simulation_start(data);
 	simulation_end(data);
 	free_data(data);
-	return 0;
+	return (0);
 }

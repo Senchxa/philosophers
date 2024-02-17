@@ -35,11 +35,11 @@ $(NAME) : $(OBJS)
 clean :
 	@rm -rf $(OBJS)
 
-fclean :
+fclean : all clean
 	@rm -rf $(NAME)
 
 re :
-	@make fclean
+	@rm -rf $(NAME) $(OBJS)
 	@make all
 	
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

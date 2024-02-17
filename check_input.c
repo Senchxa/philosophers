@@ -12,60 +12,66 @@
 
 #include "philo.h"
 
-void	check_args(int argc)
-{
-	if (argc < 5 || argc > 6)
-		ft_exit_error("Please provide 5 or 6 arguments.", NULL);
-}
-
-void	check_format(char *arg)
-{
-	int	i;
-
-	i = 0;
-	while (arg[i] != '\0')
-	{
-		if (arg[i] < '0' || arg[i] > '9')
-			ft_exit_error("Please provide digit arguments only.", NULL);
-		i++;
-	}
-}
-
-void	check_intmax(char *arg)
-{
-	int	num;
-
-	num = ft_atoi(arg);
-	if (num < 0)
-		ft_exit_error("Please provide positive values only.", NULL);
-}
-
 void	check_values(char *arg, int i)
 {
 	if (i == 1)
 	{
-		if (ft_atoi(arg) < 1)
+		if (integer_atoi(arg) < 1)
 			ft_exit_error("At least 1 philosopher is required.", NULL);
 	}
 	else if (i == 5)
 	{
-		if (ft_atoi(arg) < 1)
+		if (integer_atoi(arg) < 1)
 			ft_exit_error("There must be at least 1 meal.", NULL);
 	}
 }
 
-int	check_input(int argc, char **argv)
+void	digit_only(char *str)
 {
 	int	i;
 
-	check_args(argc);
-	i = 1;
-	while (argv[i] != NULL)
+	i = 0;
+	while (str[i] != '\0')
 	{
-		check_format(argv[i]);
-		check_intmax(argv[i]);
-		check_values(argv[i], i);
+		if (str[i] < '0' || str[i] > '9')
+			ft_exit_error("Please provide positive digits only.", NULL);
 		i++;
+	}
+}
+
+int	integer_atoi(char *str)
+{
+	unsigned long long int	result;
+	int						i;
+
+	i = 0;
+	result = 0;
+	while (str[i] && (str[i] >= '0' && str[i] <= '9'))
+	{
+		result = result * 10 + (str[i] - '0');
+		i++;
+	}
+	if (result > INT_MAX)
+		ft_exit_error("Provide a number smaller than INT_MAX.", NULL);
+	return ((int)result);
+}
+
+int	check_input(int ac, char **av)
+{
+	int	i;
+	int nb;
+
+	if (ac < 5 || ac > 6)
+		ft_exit_error("Please provide 5 or 6 arguments.", NULL);
+	i = 1;
+
+	while (i < ac)
+	{
+		digit_only(av[i]);
+		nb = integer_atoi(av[i]);
+		check_values(av[i], i);
+		i++;
+
 	}
 	return (0);
 }
