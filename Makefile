@@ -22,8 +22,7 @@ SRC = main.c\
 	getters_setters.c\
 	utils.c\
 	eat_utils.c\
-	exit.c\
-	simulation.c
+	exit.c
 	
 OBJS = $(SRC:.c=.o)
 

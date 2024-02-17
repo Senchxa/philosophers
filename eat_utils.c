@@ -23,6 +23,7 @@ void	forks_pickup(t_philo *philo)
 		pthread_mutex_lock(philo->fork_right);
 	else
 		pthread_mutex_lock(philo->fork_left);
+
 }
 
 void	forks_putdown(t_philo *philo)

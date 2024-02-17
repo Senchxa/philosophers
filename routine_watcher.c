@@ -54,20 +54,20 @@ int	watch_end(t_data *data)
 
 	i = 0;
 	rounds_finished = 1;
-	while (i < data->philos_total)
+	while (i < data->num_of_philos)
 	{
 		pthread_mutex_lock(&data->philos[i]->lock_philo);
 		if (philo_died(data->philos[i]) == 0)
 			return (0);
-		if (data->rounds_total != -1)
+		if (data->num_of_meals != -1)
 		{
-			if (data->philos[i]->rounds_eaten < data->rounds_total)
+			if (data->philos[i]->meals_eaten < data->num_of_meals)
 				rounds_finished = 0;
 		}
 		pthread_mutex_unlock(&data->philos[i]->lock_philo);
 		i++;
 	}
-	if (data->rounds_total != -1 && rounds_finished == 1)
+	if (data->num_of_meals != -1 && rounds_finished == 1)
 	{
 		set_death_flag(data);
 		return (0);
@@ -75,15 +75,6 @@ int	watch_end(t_data *data)
 	return (1);
 }
 
-/**
- * @brief Thread routine for watching the end condition.
- * 
- * This function is responsible for continuously checking the end condition
- * and returning if it is met. It also sleeps for 1 microsecond between checks.
- * 
- * @param data_ptr A pointer to the data structure containing the necessary information.
- * @return void* Always returns NULL.
- */
 void *routine_watcher(void *data_ptr)
 {
 	t_data *data;

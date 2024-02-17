@@ -23,7 +23,7 @@ void	action_think(t_philo *philo)
 	int64_t	think_time;
 
 	pthread_mutex_lock(&philo->lock_philo);
-	if (philo->data->philos_total % 2 == 0)
+	if (philo->data->num_of_philos % 2 == 0)
 		think_time = philo->data->time_to_eat - philo->data->time_to_sleep;
 	else
 		think_time = philo->data->time_to_eat * 2 - philo->data->time_to_sleep;
@@ -46,7 +46,7 @@ void	eat(t_philo *philo)
 	if (get_death_flag(philo->data) != 1)
 	{
 		pthread_mutex_lock(&philo->lock_philo);
-		philo->rounds_eaten++;
+		philo->meals_eaten++;
 		pthread_mutex_unlock(&philo->lock_philo);
 	}
 	forks_putdown(philo);
@@ -62,23 +62,12 @@ void	*routine_one(t_philo *philo)
 	return (NULL);
 }
 
-/**
- * @brief The routine function for a philosopher thread.
- * 
- * This function is executed by each philosopher thread. It performs the
- * actions of eating, sleeping, and thinking in a loop until the death flag
- * is set.
- * 
- * @param philo_ptr A pointer to the philosopher struct.
- * @return void* Always returns NULL.
- */
-void *routine_philo(void *philo_ptr)
-{
-	t_philo *philo;
-
+void	*routine_philo(void *philo_ptr)
+{	
+	t_philo	*philo;
 	philo = (t_philo *)philo_ptr;
 	synchronize_start(philo->data->time_of_start);
-	if (philo->data->philos_total == 1)
+	if (philo->data->num_of_philos == 1)
 		return (routine_one(philo));
 	if (philo->id % 2)
 		ft_usleep(philo->data->time_to_eat);
