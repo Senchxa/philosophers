@@ -29,7 +29,7 @@ int	free_mutexes(t_data *data)
 	{
 		while (i < data->num_of_philos)
 		{
-			pthread_mutex_destroy(&data->locks_forks[i]);
+			pthread_mutex_destroy(&data->forks_array[i]);
 			pthread_mutex_destroy(&data->philos[i]->lock_eating);
 			pthread_mutex_destroy(&data->philos[i]->lock_philo);
 			i++;
@@ -48,8 +48,8 @@ int	free_data(t_data *data)
 		return (0);
 	if (data)
 		free_mutexes(data);
-	if (data->locks_forks)
-		free(data->locks_forks);
+	if (data->forks_array)
+		free(data->forks_array);
 	i = 0;
 	if (data->philos)
 	{

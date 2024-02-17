@@ -25,8 +25,8 @@ int philo_died(t_philo *philo)
 
 	if (get_eating_flag(philo) == 1)
 		return 1;
-	curr_time = ft_save_time();
-	if ((curr_time - philo->last_meal) >= philo->data->time_to_die)
+	curr_time = get_time();
+	if ((curr_time - philo->time_of_last_meal) >= philo->data->time_to_die)
 	{
 		set_death_flag(philo->data);
 		ft_print_status(philo, DIE);

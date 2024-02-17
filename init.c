@@ -44,12 +44,12 @@ void	assign_forks(t_data *data)
 	i = 1;
 	while (i < data->num_of_philos)
 	{
-		data->philos[i]->fork_left = &data->locks_forks[i];
-		data->philos[i]->fork_right = &data->locks_forks[i - 1];
+		data->philos[i]->first_fork = &data->forks_array[i];
+		data->philos[i]->second_fork = &data->forks_array[i - 1];
 		i++;
 	}
-	data->philos[0]->fork_left = &data->locks_forks[0];
-	data->philos[0]->fork_right = &data->locks_forks[data->num_of_philos - 1];
+	data->philos[0]->first_fork = &data->forks_array[0];
+	data->philos[0]->second_fork = &data->forks_array[data->num_of_philos - 1];
 }
 
 pthread_mutex_t	*init_forks(t_data *data)
@@ -87,7 +87,7 @@ t_data	*init_data(int ac, char **av)
 	pthread_mutex_init(&data->lock_print, NULL);
 	pthread_mutex_init(&data->lock_end, NULL);
 	data->philos = init_struct_philos(data);
-	data->locks_forks = init_forks(data);
+	data->forks_array = init_forks(data);
 	assign_forks(data);
 	return (data);
 }

@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-uint64_t	ft_save_time(void)
+uint64_t	get_time(void)
 {
 	struct timeval	tv;
 	uint64_t		timestamp;
@@ -26,8 +26,8 @@ int	ft_usleep(uint64_t time)
 {
 	uint64_t	start;
 
-	start = ft_save_time();
-	while ((ft_save_time() - start) < time)
+	start = get_time();
+	while ((get_time() - start) < time)
 		usleep(1);
 	return (0);
 }
@@ -42,7 +42,7 @@ int	ft_print_status(t_philo	*philo, char *status)
 		pthread_mutex_unlock(&philo->data->lock_print);
 		return (0);
 	}
-	curr_time = ft_save_time() - philo->data->time_of_start;
+	curr_time = get_time() - philo->data->time_of_start;
 	if (status[0] == 'd')
 		ft_usleep(10);
 	printf("%lu \t\t %d \t\t %s\n", curr_time, philo->id + 1, status);
@@ -52,6 +52,6 @@ int	ft_print_status(t_philo	*philo, char *status)
 
 void	synchronize_start(uint64_t time_of_start)
 {
-	while (ft_save_time() < time_of_start)
+	while (get_time() < time_of_start)
 		continue ;
 }

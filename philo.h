@@ -34,18 +34,18 @@ typedef struct s_philo
 	int				id;
 	int				meals_eaten;
 	int				eating_flag;
-	pthread_mutex_t	*fork_left;
-	pthread_mutex_t	*fork_right;
+	pthread_mutex_t	*first_fork;
+	pthread_mutex_t	*second_fork;
 	pthread_mutex_t	lock_philo;
 	pthread_mutex_t	lock_eating;
-	uint64_t		last_meal;
+	uint64_t		time_of_last_meal;
 }			t_philo;
 
 typedef struct s_data
 {
 	struct s_philo	**philos;
 	pthread_t		monitor;
-	pthread_mutex_t	*locks_forks;
+	pthread_mutex_t	*forks_array;
 	pthread_mutex_t	lock_print;
 	pthread_mutex_t	lock_end;
 	int				num_of_meals;
@@ -93,7 +93,7 @@ int				get_eating_flag(t_philo *philo);
 void			set_eating_flag(t_philo *philo, int flag);
 
 // utils.c
-uint64_t		ft_save_time(void);
+uint64_t		get_time(void);
 int				ft_usleep(uint64_t time);
 void			synchronize_start(uint64_t time_of_start);
 int				ft_print_status(t_philo	*philo, char *status);

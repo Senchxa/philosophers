@@ -16,14 +16,14 @@ int	simulation_start(t_data *data)
 {
 	int		i;
 
-	data->time_of_start = ft_save_time() + (data->num_of_philos * 10);
+	data->time_of_start = get_time() + (data->num_of_philos * 10);
 	i = 0;
 	while (i < data->num_of_philos)
 	{
 		pthread_create(&data->philos[i]->thread, NULL, &routine_philo,
 			data->philos[i]);
 		pthread_mutex_lock(&data->philos[i]->lock_philo);
-		data->philos[i]->last_meal = data->time_of_start;
+		data->philos[i]->time_of_last_meal = data->time_of_start;
 		pthread_mutex_unlock(&data->philos[i]->lock_philo);
 		i++;
 	}

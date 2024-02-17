@@ -40,7 +40,7 @@ void	eat(t_philo *philo)
 	ft_print_status(philo, FORK_EQUIP);
 	ft_print_status(philo, EAT);
 	pthread_mutex_lock(&philo->lock_philo);
-	philo->last_meal = ft_save_time();
+	philo->time_of_last_meal = get_time();
 	pthread_mutex_unlock(&philo->lock_philo);
 	ft_usleep(philo->data->time_to_eat);
 	if (get_death_flag(philo->data) != 1)
@@ -54,11 +54,11 @@ void	eat(t_philo *philo)
 
 void	*routine_one(t_philo *philo)
 {
-	pthread_mutex_lock(philo->fork_left);
+	pthread_mutex_lock(philo->first_fork);
 	ft_print_status(philo, FORK_EQUIP);
 	ft_usleep(philo->data->time_to_die);
 	ft_print_status(philo, DIE);
-	pthread_mutex_unlock(philo->fork_left);
+	pthread_mutex_unlock(philo->first_fork);
 	return (NULL);
 }
 
