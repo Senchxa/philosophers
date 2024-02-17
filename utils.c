@@ -45,12 +45,12 @@ int	ft_print_status(t_philo	*philo, char *status)
 	curr_time = get_time() - philo->data->time_of_start;
 	if (status[0] == 'd')
 		ft_usleep(10);
-	printf("%lu \t\t %d \t\t %s\n", curr_time, philo->id + 1, status);
+	printf("%lu \t\t %d \t\t %s\n", curr_time, philo->id , status);
 	pthread_mutex_unlock(&philo->data->lock_print);
 	return (0);
 }
 
-void	synchronize_start(uint64_t time_of_start)
+void	wait_for_all_threads(uint64_t time_of_start)
 {
 	while (get_time() < time_of_start)
 		continue ;

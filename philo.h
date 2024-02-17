@@ -89,13 +89,13 @@ int				philo_died(t_philo *philo);
 // getters_setters.c
 int				get_death_flag(t_data *data);
 void			set_death_flag(t_data *data);
-int				get_eating_flag(t_philo *philo);
-void			set_eating_flag(t_philo *philo, int flag);
+//int				get_eating_flag(t_philo *philo);
+//void			set_eating_flag(t_philo *philo, int flag);
 
 // utils.c
 uint64_t		get_time(void);
 int				ft_usleep(uint64_t time);
-void			synchronize_start(uint64_t time_of_start);
+void			wait_for_all_threads(uint64_t time_of_start);
 int				ft_print_status(t_philo	*philo, char *status);
 
 // exit.c

@@ -37,7 +37,6 @@ void	action_think(t_philo *philo)
 void	eat(t_philo *philo)
 {
 	forks_pickup(philo);
-	ft_print_status(philo, FORK_EQUIP);
 	ft_print_status(philo, EAT);
 	pthread_mutex_lock(&philo->lock_philo);
 	philo->time_of_last_meal = get_time();
@@ -66,7 +65,7 @@ void	*routine_philo(void *philo_ptr)
 {	
 	t_philo	*philo;
 	philo = (t_philo *)philo_ptr;
-	synchronize_start(philo->data->time_of_start);
+	wait_for_all_threads(philo->data->time_of_start);
 	if (philo->data->num_of_philos == 1)
 		return (routine_one(philo));
 	if (philo->id % 2)

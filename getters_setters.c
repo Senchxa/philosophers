@@ -29,7 +29,7 @@ void	set_death_flag(t_data *data)
 	pthread_mutex_unlock(&data->lock_end);
 }
 
-int	get_eating_flag(t_philo *philo)
+/*int	get_eating_flag(t_philo *philo)
 {
 	int	res;
 
@@ -37,11 +37,11 @@ int	get_eating_flag(t_philo *philo)
 	res = philo->eating_flag;
 	pthread_mutex_unlock(&philo->lock_eating);
 	return (res);
-}
+}*/
 
-void	set_eating_flag(t_philo *philo, int flag)
+/*void	set_eating_flag(t_philo *philo, int flag)
 {
 	pthread_mutex_lock(&philo->lock_eating);
 	philo->data->death_flag = flag;
 	pthread_mutex_unlock(&philo->lock_eating);
-}
+}*/

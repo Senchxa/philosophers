@@ -12,19 +12,12 @@
 
 #include "philo.h"
 
-
-/**
- * Checks if a philosopher has died.
- * 
- * @param philo The philosopher to check.
- * @return 1 if the philosopher has died, 0 otherwise.
- */
 int philo_died(t_philo *philo)
 {
 	uint64_t curr_time;
 
-	if (get_eating_flag(philo) == 1)
-		return 1;
+	/*if (get_eating_flag(philo) == 1)
+		return 1;*/
 	curr_time = get_time();
 	if ((curr_time - philo->time_of_last_meal) >= philo->data->time_to_die)
 	{
@@ -36,18 +29,7 @@ int philo_died(t_philo *philo)
 	return 1;
 }
 
-/**
- * @brief Watches for the end condition of the philosopher simulation.
- * 
- * This function checks if any philosopher has died or if all philosophers have finished eating the specified number of rounds.
- * If a philosopher has died, the function returns 0 to indicate the end condition has been met.
- * If all philosophers have finished eating the specified number of rounds, the function sets the death flag and returns 0.
- * Otherwise, the function returns 1 to indicate that the simulation is still ongoing.
- * 
- * @param data A pointer to the data structure containing information about the philosophers and simulation parameters.
- * @return int Returns 0 if the end condition has been met, 1 otherwise.
- */
-int	watch_end(t_data *data)
+int watch_end(t_data *data)
 {
 	int	i;
 	int	rounds_finished;
@@ -80,7 +62,7 @@ void *routine_watcher(void *data_ptr)
 	t_data *data;
 
 	data = (t_data *)data_ptr;
-	synchronize_start(data->time_of_start);
+	wait_for_all_threads(data->time_of_start);
 	while (1)
 	{
 		if (watch_end(data) == 0)

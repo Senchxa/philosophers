@@ -29,7 +29,7 @@ t_philo	**init_struct_philos(t_data *data)
 		pthread_mutex_init(&philos[i]->lock_philo, NULL);
 		pthread_mutex_init(&philos[i]->lock_eating, NULL);
 		philos[i]->data = data;
-		philos[i]->id = i;
+		philos[i]->id = i + 1;
 		philos[i]->meals_eaten = 0;
 		philos[i]->eating_flag = 0;
 		i++;
