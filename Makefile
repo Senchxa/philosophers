@@ -19,7 +19,7 @@ SRC = main.c\
 	init.c\
 	routine_philo.c\
 	routine_watcher.c\
-	getters_setters.c\
+	death_flag.c\
 	utils.c\
 	eat_utils.c\
 	exit.c

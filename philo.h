@@ -73,12 +73,12 @@ void			assign_forks(t_data *data);
 int				simulation_start(t_data *data);
 
 void			*routine_philo(void *philo_ptr);
-void			*routine_one(t_philo *philo);
+void			*lonely_philo(t_philo *philo);
 void			eat(t_philo *philo);
 void			forks_pickup(t_philo *philo);
 void			forks_putdown(t_philo *philo);
-void			action_sleep(t_philo *philo, int64_t philo_sleep_time);
-void			action_think(t_philo *philo);
+void			sleep_philo(t_philo *philo, int64_t philo_sleep_time);
+void			think_philo(t_philo *philo);
 
 
 void			*routine_watcher(void *data_ptr);
@@ -88,8 +88,7 @@ int				philo_died(t_philo *philo);
 // getters_setters.c
 int				get_death_flag(t_data *data);
 void			set_death_flag(t_data *data);
-//int				get_eating_flag(t_philo *philo);
-//void			set_eating_flag(t_philo *philo, int flag);
+
 
 // utils.c
 uint64_t		get_time(void);

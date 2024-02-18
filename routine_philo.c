@@ -12,13 +12,13 @@
 
 #include "philo.h"
 
-void	action_sleep(t_philo *philo, int64_t philo_sleep_time)
+void	sleep_philo(t_philo *philo, int64_t philo_sleep_time)
 {
 	ft_print_status(philo, SLEEP);
 	ft_usleep(philo_sleep_time);
 }
 
-void	action_think(t_philo *philo)
+void	think_philo(t_philo *philo)
 {
 	int64_t	think_time;
 
@@ -51,7 +51,7 @@ void	eat(t_philo *philo)
 	forks_putdown(philo);
 }
 
-void	*routine_one(t_philo *philo)
+void	*lonely_philo(t_philo *philo)
 {
 	pthread_mutex_lock(philo->first_fork);
 	ft_print_status(philo, FORK_EQUIP);
@@ -67,14 +67,14 @@ void	*routine_philo(void *philo_ptr)
 	philo = (t_philo *)philo_ptr;
 	wait_for_all_threads(philo->data->time_of_start);
 	if (philo->data->num_of_philos == 1)
-		return (routine_one(philo));
+		return (lonely_philo(philo));
 	if (philo->id % 2)
 		ft_usleep(philo->data->time_to_eat);
 	while (get_death_flag(philo->data) != 1)
 	{
 		eat(philo);
-		action_sleep(philo, philo->data->time_to_sleep);
-		action_think(philo);
+		sleep_philo(philo, philo->data->time_to_sleep);
+		think_philo(philo);
 	}
 	return (NULL);
 }
