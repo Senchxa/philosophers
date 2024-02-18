@@ -44,9 +44,12 @@ int	ft_print_status(t_philo	*philo, char *status)
 		return (0);
 	}
 	curr_time = get_time() - philo->data->time_of_start;
-	if (status[0] == 'd')
-		ft_usleep(10);
-	printf("%lu \t\t %d \t\t %s\n", curr_time, philo->id , status);
+	if (ft_strcmpr(status, "died") == 0)
+		printf(RED"%lu \t\t %d \t\t %s\n"RESET, curr_time, philo->id , status);
+	else if (ft_strcmpr(status, "is eating") == 0)
+		printf(GREEN"%lu \t\t %d \t\t %s\n"RESET, curr_time, philo->id , status);
+	else
+		printf("%lu \t\t %d \t\t %s\n", curr_time, philo->id , status);
 	pthread_mutex_unlock(&philo->data->lock_print);
 	return (0);
 }

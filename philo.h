@@ -19,6 +19,10 @@
 # define EAT			"is eating"
 # define SLEEP			"is sleeping"
 
+# define GREEN			"\033[0;32m"
+# define RED			"\033[0;31m"
+# define RESET			"\033[0m"
+
 # include <stdlib.h>
 # include <stdio.h>
 # include <pthread.h>
@@ -94,6 +98,7 @@ time_t		get_time(void);
 int				ft_usleep(time_t time);
 void			wait_for_all_threads(time_t time_of_start);
 int				ft_print_status(t_philo	*philo, char *status);
+int ft_strcmpr(const char *s1, const char *s2);
 
 // exit.c
 int				ft_exit_error(char *error, t_data *data);
