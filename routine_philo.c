@@ -42,7 +42,7 @@ void	eat(t_philo *philo)
 	philo->time_of_last_meal = get_time();
 	pthread_mutex_unlock(&philo->lock_philo);
 	ft_usleep(philo->data->time_to_eat);
-	if (get_death_flag(philo->data) != 1)
+	if (!get_death_flag(philo->data))
 	{
 		pthread_mutex_lock(&philo->lock_philo);
 		philo->meals_eaten++;

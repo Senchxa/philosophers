@@ -14,7 +14,7 @@
 
 int philo_died(t_philo *philo)
 {
-	uint64_t curr_time;
+	time_t curr_time;
 
 	curr_time = get_time();
 	if ((curr_time - philo->time_of_last_meal) >= philo->data->time_to_die)
@@ -30,10 +30,10 @@ int philo_died(t_philo *philo)
 int watch_end(t_data *data)
 {
 	int	i;
-	int	rounds_finished;
+	int	all_ate_enough;
 
 	i = 0;
-	rounds_finished = 1;
+	all_ate_enough = 1;
 	while (i < data->num_of_philos)
 	{
 		pthread_mutex_lock(&data->philos[i]->lock_philo);
@@ -42,12 +42,12 @@ int watch_end(t_data *data)
 		if (data->num_of_meals != -1)
 		{
 			if (data->philos[i]->meals_eaten < data->num_of_meals)
-				rounds_finished = 0;
+				all_ate_enough = 0;
 		}
 		pthread_mutex_unlock(&data->philos[i]->lock_philo);
 		i++;
 	}
-	if (data->num_of_meals != -1 && rounds_finished == 1)
+	if (data->num_of_meals != -1 && all_ate_enough == 1)
 	{
 		set_death_flag(data);
 		return (0);

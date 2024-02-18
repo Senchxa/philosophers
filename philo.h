@@ -21,7 +21,7 @@
 
 # include <stdlib.h>
 # include <stdio.h>
-# include <stdint.h> // for uint64_t
+# include <stdint.h> // for time_t
 # include <pthread.h> // for threads
 # include <unistd.h> // for usleep
 # include <sys/time.h> // for gettimeofday
@@ -37,7 +37,7 @@ typedef struct s_philo
 	pthread_mutex_t	*second_fork;
 	pthread_mutex_t	lock_philo;
 	pthread_mutex_t	lock_eating;
-	uint64_t		time_of_last_meal;
+	time_t		time_of_last_meal;
 }			t_philo;
 
 typedef struct s_data
@@ -50,10 +50,10 @@ typedef struct s_data
 	int				num_of_meals;
 	int				num_of_philos;
 	int				death_flag;
-	uint64_t		time_of_start;
-	uint64_t		time_to_die;
-	uint64_t		time_to_eat;
-	uint64_t		time_to_sleep;
+	time_t		time_of_start;
+	time_t		time_to_die;
+	time_t		time_to_eat;
+	time_t		time_to_sleep;
 }			t_data;
 
 // check_input.c
@@ -91,9 +91,9 @@ void			set_death_flag(t_data *data);
 
 
 // utils.c
-uint64_t		get_time(void);
-int				ft_usleep(uint64_t time);
-void			wait_for_all_threads(uint64_t time_of_start);
+time_t		get_time(void);
+int				ft_usleep(time_t time);
+void			wait_for_all_threads(time_t time_of_start);
 int				ft_print_status(t_philo	*philo, char *status);
 
 // exit.c

@@ -24,7 +24,6 @@ void	forks_pickup(t_philo *philo)
 	else
 		pthread_mutex_lock(philo->first_fork);
 	ft_print_status(philo, FORK_EQUIP);
-
 }
 
 void	forks_putdown(t_philo *philo)

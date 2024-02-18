@@ -12,19 +12,19 @@
 
 #include "philo.h"
 
-uint64_t	get_time(void)
+time_t	get_time(void)
 {
 	struct timeval	tv;
-	uint64_t		timestamp;
+	time_t		timestamp;
 
 	gettimeofday(&tv, NULL);
 	timestamp = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
 	return (timestamp);
 }
 
-int	ft_usleep(uint64_t time)
+int	ft_usleep(time_t time)
 {
-	uint64_t	start;
+	time_t	start;
 
 	start = get_time();
 	while ((get_time() - start) < time)
@@ -32,9 +32,10 @@ int	ft_usleep(uint64_t time)
 	return (0);
 }
 
+
 int	ft_print_status(t_philo	*philo, char *status)
 {
-	uint64_t	curr_time;
+	time_t	curr_time;
 
 	pthread_mutex_lock(&philo->data->lock_print);
 	if (get_death_flag(philo->data) == 1 && status[0] != 'd')
@@ -50,8 +51,22 @@ int	ft_print_status(t_philo	*philo, char *status)
 	return (0);
 }
 
-void	wait_for_all_threads(uint64_t time_of_start)
+void	wait_for_all_threads(time_t time_of_start)
 {
 	while (get_time() < time_of_start)
 		continue ;
+}
+
+int ft_strcmpr(const char *s1, const char *s2)
+{
+	while (*s1 && *s2)
+	{
+		if (*s1 != *s2)
+			return (1);
+		s1++;
+		s2++;
+	}
+	if (*s1 != *s2)
+		return (1);
+	return (0);
 }

@@ -14,12 +14,12 @@
 
 int	get_death_flag(t_data *data)
 {
-	int	res;
+	int	value;
 
 	pthread_mutex_lock(&data->lock_end);
-	res = data->death_flag;
+	value = data->death_flag;
 	pthread_mutex_unlock(&data->lock_end);
-	return (res);
+	return (value);
 }
 
 void	set_death_flag(t_data *data)

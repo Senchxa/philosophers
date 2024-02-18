@@ -76,9 +76,9 @@ t_data	*init_data(int ac, char **av)
 	if (!data)
 		ft_exit_error("Malloc error", NULL);
 	data->num_of_philos = integer_atoi(av[1]);
-	data->time_to_die = (uint64_t)integer_atoi(av[2]);
-	data->time_to_eat = (uint64_t)integer_atoi(av[3]);
-	data->time_to_sleep = (uint64_t)integer_atoi(av[4]);
+	data->time_to_die = (time_t)integer_atoi(av[2]);
+	data->time_to_eat = (time_t)integer_atoi(av[3]);
+	data->time_to_sleep = (time_t)integer_atoi(av[4]);
 	data->num_of_meals = -1;
 	if (ac == 6)
 		data->num_of_meals = integer_atoi(av[5]);
