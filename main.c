@@ -28,7 +28,7 @@ int	simulation_start(t_data *data)
 		i++;
 	}
 	if (data->num_of_philos > 1)
-		pthread_create(&data->monitor, NULL, &routine_watcher, data);
+		pthread_create(&data->monitor, NULL, &monitor_routine, data);
 	i = 0;
 	while (i < data->num_of_philos)
 	{

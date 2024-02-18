@@ -21,10 +21,9 @@
 
 # include <stdlib.h>
 # include <stdio.h>
-# include <stdint.h> // for time_t
-# include <pthread.h> // for threads
-# include <unistd.h> // for usleep
-# include <sys/time.h> // for gettimeofday
+# include <pthread.h>
+# include <unistd.h> 
+# include <sys/time.h> 
 # include <limits.h>
 
 typedef struct s_philo
@@ -81,8 +80,8 @@ void			sleep_philo(t_philo *philo, int64_t philo_sleep_time);
 void			think_philo(t_philo *philo);
 
 
-void			*routine_watcher(void *data_ptr);
-int				watch_end(t_data *data);
+void			*monitor_routine(void *data_ptr);
+int				monitor_run(t_data *data);
 int				philo_died(t_philo *philo);
 
 // getters_setters.c

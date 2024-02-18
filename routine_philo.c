@@ -20,9 +20,17 @@ void	sleep_philo(t_philo *philo, int64_t philo_sleep_time)
 
 void	think_philo(t_philo *philo)
 {
-	int64_t	think_time;
+	int64_t	time_to_think;
+
 
 	pthread_mutex_lock(&philo->lock_philo);
+	time_to_think = philo->data->time_to_eat - philo->data->time_to_sleep;
+	pthread_mutex_unlock(&philo->lock_philo);
+	if (time_to_think < 0)
+		time_to_think = 0;
+	ft_print_status(philo, THINK);
+	ft_usleep(time_to_think);
+	/*pthread_mutex_lock(&philo->lock_philo);
 	if (philo->data->num_of_philos % 2 == 0)
 		think_time = philo->data->time_to_eat - philo->data->time_to_sleep;
 	else
@@ -31,7 +39,7 @@ void	think_philo(t_philo *philo)
 	if (think_time < 0)
 		think_time = 0;
 	ft_print_status(philo, THINK);
-	ft_usleep(think_time);
+	ft_usleep(think_time);*/
 }
 
 void	eat(t_philo *philo)
