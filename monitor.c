@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine_watcher.c                                  :+:      :+:    :+:   */
+/*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dnoll <dnoll@studen.42.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:35:47 by dnoll             #+#    #+#             */
-/*   Updated: 2024/02/16 14:35:48 by dnoll            ###   ########.fr       */
+/*   Updated: 2024/02/18 15:25:02 by dnoll            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int philo_died(t_philo *philo)
+int	philo_died(t_philo *philo)
 {
-	time_t curr_time;
+	time_t	curr_time;
 
 	curr_time = get_time();
 	if ((curr_time - philo->time_of_last_meal) >= philo->data->time_to_die)
 	{
 		set_death_flag(philo->data);
-		ft_print_status(philo, DIE);
+		ft_print_status(philo, DIED);
 		pthread_mutex_unlock(&philo->lock_philo);
-		return 0;
+		return (0);
 	}
-	return 1;
+	return (1);
 }
 
-int monitor_run(t_data *data)
+int	monitor_run(t_data *data)
 {
 	int	i;
 	int	all_ate_enough;
@@ -55,9 +55,9 @@ int monitor_run(t_data *data)
 	return (1);
 }
 
-void *monitor_routine(void *data_ptr)
+void	*monitor_routine(void *data_ptr)
 {
-	t_data *data;
+	t_data	*data;
 
 	data = (t_data *)data_ptr;
 	wait_for_all_threads(data->time_of_start);

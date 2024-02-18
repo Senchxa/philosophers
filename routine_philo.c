@@ -6,7 +6,7 @@
 /*   By: dnoll <dnoll@studen.42.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:35:40 by dnoll             #+#    #+#             */
-/*   Updated: 2024/02/16 14:35:41 by dnoll            ###   ########.fr       */
+/*   Updated: 2024/02/18 15:26:38 by dnoll            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	think_philo(t_philo *philo)
 {
 	int64_t	time_to_think;
 
-
 	pthread_mutex_lock(&philo->lock_philo);
 	time_to_think = philo->data->time_to_eat - philo->data->time_to_sleep;
 	pthread_mutex_unlock(&philo->lock_philo);
@@ -30,16 +29,6 @@ void	think_philo(t_philo *philo)
 		time_to_think = 0;
 	ft_print_status(philo, THINK);
 	ft_usleep(time_to_think);
-	/*pthread_mutex_lock(&philo->lock_philo);
-	if (philo->data->num_of_philos % 2 == 0)
-		think_time = philo->data->time_to_eat - philo->data->time_to_sleep;
-	else
-		think_time = philo->data->time_to_eat * 2 - philo->data->time_to_sleep;
-	pthread_mutex_unlock(&philo->lock_philo);
-	if (think_time < 0)
-		think_time = 0;
-	ft_print_status(philo, THINK);
-	ft_usleep(think_time);*/
 }
 
 void	eat(t_philo *philo)
@@ -64,14 +53,15 @@ void	*lonely_philo(t_philo *philo)
 	pthread_mutex_lock(philo->first_fork);
 	ft_print_status(philo, FORK_EQUIP);
 	ft_usleep(philo->data->time_to_die);
-	ft_print_status(philo, DIE);
+	ft_print_status(philo, DIED);
 	pthread_mutex_unlock(philo->first_fork);
 	return (NULL);
 }
 
 void	*routine_philo(void *philo_ptr)
-{	
+{
 	t_philo	*philo;
+
 	philo = (t_philo *)philo_ptr;
 	wait_for_all_threads(philo->data->time_of_start);
 	if (philo->data->num_of_philos == 1)

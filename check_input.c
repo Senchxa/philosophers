@@ -6,7 +6,7 @@
 /*   By: dnoll <dnoll@studen.42.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:34:08 by dnoll             #+#    #+#             */
-/*   Updated: 2024/02/16 15:00:58 by dnoll            ###   ########.fr       */
+/*   Updated: 2024/02/18 15:13:00 by dnoll            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,17 @@ int	integer_atoi(char *str)
 int	check_input(int ac, char **av)
 {
 	int	i;
-	int nb;
+	int	nb;
 
 	if (ac < 5 || ac > 6)
 		ft_exit_error("Please provide 5 or 6 arguments.", NULL);
 	i = 1;
-
 	while (i < ac)
 	{
 		digit_only(av[i]);
 		nb = integer_atoi(av[i]);
 		check_values(av[i], i);
 		i++;
-
 	}
 	return (0);
 }
