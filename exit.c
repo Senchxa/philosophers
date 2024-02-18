@@ -30,7 +30,6 @@ int	free_mutexes(t_data *data)
 		while (i < data->num_of_philos)
 		{
 			pthread_mutex_destroy(&data->forks_array[i]);
-			pthread_mutex_destroy(&data->philos[i]->lock_eating);
 			pthread_mutex_destroy(&data->philos[i]->lock_philo);
 			i++;
 		}

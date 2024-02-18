@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-void	sleep_philo(t_philo *philo, int64_t philo_sleep_time)
+void	sleep_philo(t_philo *philo, time_t philo_sleep_time)
 {
 	ft_print_status(philo, SLEEP);
 	ft_usleep(philo_sleep_time);
@@ -20,7 +20,7 @@ void	sleep_philo(t_philo *philo, int64_t philo_sleep_time)
 
 void	think_philo(t_philo *philo)
 {
-	int64_t	time_to_think;
+	time_t	time_to_think;
 
 	pthread_mutex_lock(&philo->lock_philo);
 	time_to_think = philo->data->time_to_eat - philo->data->time_to_sleep;
@@ -50,11 +50,11 @@ void	eat(t_philo *philo)
 
 void	*lonely_philo(t_philo *philo)
 {
-	pthread_mutex_lock(philo->first_fork);
+	pthread_mutex_lock(&philo->first_fork);
 	ft_print_status(philo, FORK_EQUIP);
 	ft_usleep(philo->data->time_to_die);
 	ft_print_status(philo, DIED);
-	pthread_mutex_unlock(philo->first_fork);
+	pthread_mutex_unlock(&philo->first_fork);
 	return (NULL);
 }
 
@@ -66,8 +66,6 @@ void	*routine_philo(void *philo_ptr)
 	wait_for_all_threads(philo->data->time_of_start);
 	if (philo->data->num_of_philos == 1)
 		return (lonely_philo(philo));
-	if (philo->id % 2)
-		ft_usleep(philo->data->time_to_eat);
 	while (get_death_flag(philo->data) != 1)
 	{
 		eat(philo);

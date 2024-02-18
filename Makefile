@@ -6,7 +6,7 @@
 #    By: dnoll <dnoll@studen.42.com>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/16 14:35:15 by dnoll             #+#    #+#              #
-#    Updated: 2024/02/16 14:40:26 by dnoll            ###   ########.fr        #
+#    Updated: 2024/02/18 15:36:36 by dnoll            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC = main.c\
 	monitor.c\
 	death_flag.c\
 	utils.c\
-	eat_utils.c\
+	forks_utils.c\
 	exit.c
 	
 OBJS = $(SRC:.c=.o)

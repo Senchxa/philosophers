@@ -53,7 +53,7 @@ int	integer_atoi(char *str)
 	}
 	if (result > INT_MAX)
 		ft_exit_error("Provide a number smaller than INT_MAX.", NULL);
-	return (result);
+	return ((int)result);
 }
 
 int	check_input(int ac, char **av)

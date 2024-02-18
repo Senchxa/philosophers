@@ -36,10 +36,9 @@ typedef struct s_philo
 	pthread_t		thread;
 	int				id;
 	int				meals_eaten;
-	pthread_mutex_t	*first_fork;
-	pthread_mutex_t	*second_fork;
+	pthread_mutex_t	first_fork;
+	pthread_mutex_t	second_fork;
 	pthread_mutex_t	lock_philo;
-	pthread_mutex_t	lock_eating;
 	time_t			time_of_last_meal;
 }			t_philo;
 

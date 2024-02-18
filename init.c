@@ -27,7 +27,6 @@ t_philo	**init_struct_philos(t_data *data)
 		if (!philos[i])
 			ft_exit_error("Failed to allocate memory for 'philo'.", data);
 		pthread_mutex_init(&philos[i]->lock_philo, NULL);
-		pthread_mutex_init(&philos[i]->lock_eating, NULL);
 		philos[i]->data = data;
 		philos[i]->id = i + 1;
 		philos[i]->meals_eaten = 0;
@@ -43,12 +42,12 @@ void	assign_forks(t_data *data)
 	i = 1;
 	while (i < data->num_of_philos)
 	{
-		data->philos[i]->first_fork = &data->forks_array[i];
-		data->philos[i]->second_fork = &data->forks_array[i - 1];
+		data->philos[i]->first_fork = data->forks_array[i];
+		data->philos[i]->second_fork = data->forks_array[i - 1];
 		i++;
 	}
-	data->philos[0]->first_fork = &data->forks_array[0];
-	data->philos[0]->second_fork = &data->forks_array[data->num_of_philos - 1];
+	data->philos[0]->first_fork = data->forks_array[0];
+	data->philos[0]->second_fork = data->forks_array[data->num_of_philos - 1];
 }
 
 pthread_mutex_t	*init_forks(t_data *data)
