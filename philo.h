@@ -33,7 +33,6 @@ typedef struct s_philo
 	pthread_t		thread;
 	int				id;
 	int				meals_eaten;
-	int				eating_flag;
 	pthread_mutex_t	*first_fork;
 	pthread_mutex_t	*second_fork;
 	pthread_mutex_t	lock_philo;

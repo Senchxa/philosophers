@@ -31,7 +31,6 @@ t_philo	**init_struct_philos(t_data *data)
 		philos[i]->data = data;
 		philos[i]->id = i + 1;
 		philos[i]->meals_eaten = 0;
-		philos[i]->eating_flag = 0;
 		i++;
 	}
 	return (philos);

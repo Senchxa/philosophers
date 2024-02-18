@@ -16,8 +16,6 @@ int philo_died(t_philo *philo)
 {
 	uint64_t curr_time;
 
-	/*if (get_eating_flag(philo) == 1)
-		return 1;*/
 	curr_time = get_time();
 	if ((curr_time - philo->time_of_last_meal) >= philo->data->time_to_die)
 	{
